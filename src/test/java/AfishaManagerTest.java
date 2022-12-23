@@ -1,113 +1,40 @@
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import ru.netology.manager.afisha_manager.filmitem.FilmItem;
+import ru.netology.manager.afisha_manager.repo.AfishaRepository;
 import ru.netology.manager.afisha_manager.service.AfishaManager;
+import static org.mockito.Mockito.*;
 
 public class AfishaManagerTest {
 
+    AfishaRepository repo = Mockito.mock(AfishaRepository.class);
+    AfishaManager manager = new AfishaManager(repo);
+
+    FilmItem film1 = new FilmItem("Бладшот", 0);
+    FilmItem film2 = new FilmItem("Вперёд", 1);
+    FilmItem film3 = new FilmItem("Отель Белград",2);
+
     @Test
-    public void shoulAddNewFilms() {
-        String filmname1 = "Бладшот";
-        String filmname2 = "Вперёд";
-        String filmname3 = "Отель Белград";
-        String filmname4 = "Джентльмены";
-        String filmname5 = "Человек-невидимка";
-        String filmname6 = "Тролли. Мировой тур";
-        String filmname7 = "Номер один";
+    public void shouldSaveNewFilm() {
+        FilmItem[] films= {film1, film2, film3};
+        doReturn(films).when(repo).getFilms();
 
-        AfishaManager service = new AfishaManager();
-        service.addFilm(filmname1);
-        service.addFilm(filmname2);
-        service.addFilm(filmname3);
-        service.addFilm(filmname4);
-        service.addFilm(filmname5);
-        service.addFilm(filmname6);
-        service.addFilm(filmname7);
-
-        String[] expected = {"Бладшот",
-        "Вперёд",
-        "Отель Белград",
-        "Джентльмены",
-        "Человек-невидимка",
-        "Тролли. Мировой тур",
-        "Номер один"};
-        String[] actual = service.findAll();
+        FilmItem[] expected = {film1, film2, film3};
+        FilmItem[] actual = manager.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldShowLastTenReversed() {
-        String filmname1 = "Бладшот";
-        String filmname2 = "Вперёд";
-        String filmname3 = "Отель Белград";
-        String filmname4 = "Джентльмены";
-        String filmname5 = "Человек-невидимка";
-        String filmname6 = "Тролли. Мировой тур";
-        String filmname7 = "Номер один";
-        String filmname8 = "Начало";
-        String filmname9 = "Атака Титанов";
-        String filmname10 = "Симпсоны в кино";
+    public void managerShouldRemoveAll() {
+        FilmItem[]  films = {};
+        doReturn(films).when(repo).removeAll();
 
-        AfishaManager service = new AfishaManager();
-        service.addFilm(filmname1);
-        service.addFilm(filmname2);
-        service.addFilm(filmname3);
-        service.addFilm(filmname4);
-        service.addFilm(filmname5);
-        service.addFilm(filmname6);
-        service.addFilm(filmname7);
-        service.addFilm(filmname8);
-        service.addFilm(filmname9);
-        service.addFilm(filmname10);
-
-        String[] expected = {
-                "Симпсоны в кино",
-                "Атака Титанов",
-                "Начало",
-                "Номер один",
-                "Тролли. Мировой тур",
-                "Человек-невидимка",
-                "Джентльмены",
-                "Отель Белград",
-                "Вперёд",
-                "Бладшот"
-        };
-        String[] actual = service.findLast();
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldShowLastCustomReversed() {
-        String filmname1 = "Бладшот";
-        String filmname2 = "Вперёд";
-        String filmname3 = "Отель Белград";
-        String filmname4 = "Джентльмены";
-        String filmname5 = "Человек-невидимка";
-        String filmname6 = "Тролли. Мировой тур";
-        String filmname7 = "Номер один";
-
-        AfishaManager service = new AfishaManager(7);
-        service.addFilm(filmname1);
-        service.addFilm(filmname2);
-        service.addFilm(filmname3);
-        service.addFilm(filmname4);
-        service.addFilm(filmname5);
-        service.addFilm(filmname6);
-        service.addFilm(filmname7);
-
-        String[] expected = {
-                "Номер один",
-                "Тролли. Мировой тур",
-                "Человек-невидимка",
-                "Джентльмены",
-                "Отель Белград",
-                "Вперёд",
-                "Бладшот"
-                };
-        String[] actual = service.findLast();
+        FilmItem[] expected = {};
+        FilmItem[] actual = manager.removeAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 }
+

@@ -1,37 +1,54 @@
 package ru.netology.manager.afisha_manager.service;
 
+import ru.netology.manager.afisha_manager.filmitem.FilmItem;
+import ru.netology.manager.afisha_manager.repo.AfishaRepository;
+
 public class AfishaManager {
-    private String[] films = new String[0];
-    private int limit;
+    private AfishaRepository repo; //инициализируем репо
+    private FilmItem[] films = new FilmItem[0]; //создаём поле с массивом, чтобы было где хранить результаты
 
-        public AfishaManager() {
-            this.limit = 10;
+    public AfishaManager(AfishaRepository repo) {
+        this.repo = repo; //просто отдаём репо в мэнеджер, не трогай
     }
 
-    public AfishaManager(int limit) {
-            this.limit = limit;
+    public void save(FilmItem film) { //даём параметром элемент вида filmName, filmID
+        repo.save(film);
     }
-    public String[] addFilm(String newFilm) { //работает не трогай
-        String[] tmp = new String[films.length + 1];
+
+    public FilmItem[] findAll() {
+        FilmItem[] all = repo.getFilms();  //работает через геттер в репо
+        return all;
+    }
+
+    public FilmItem[] findById(int filmId) { //отдаём в параметр filmID
+       this.films = repo.getFilms();         //получаем существующий массив из репо
+       FilmItem[] tmp = new FilmItem[1];     //создаём массив на искомый элемент
         for (int i = 0; i < films.length; i++) {
-            tmp[i] = films[i];
+            if (i == filmId) {               // id=Index, когда находим нужный, то
+                tmp[i] = films[i];           //копируем содержимое
+                this.films = tmp;            //присваеваем в поле результат
+            }
         }
-        tmp[tmp.length - 1] = newFilm;
+        return films;
+    }
+
+    public FilmItem[] removeById(int filmId) {      //полная логика удаления элемента массива
+        this.films = repo.getFilms();
+        FilmItem[] tmp = new FilmItem[films.length - 1];
+        int copyToIndex = 0;
+        for (FilmItem film : films) {
+            if(!film.equals(filmId)) {
+                tmp[copyToIndex] = film;
+                copyToIndex++;
+            }
+        }
         films = tmp;
         return films;
     }
 
-    //
-    public String[] findAll() {
-        return films;
-    }
-
-    public String[] findLast() {
-        String[] reversed = new String[limit];
-        for (int i = 0; i < reversed.length; i++) {
-            reversed[i] = films[films.length - 1 - i];
-        }
-        return reversed;
+    public FilmItem[] removeAll() { //удаление всего из репо
+        repo.removeAll();
+        return new FilmItem[0];
     }
 }
 
