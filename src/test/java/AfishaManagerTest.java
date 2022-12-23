@@ -25,7 +25,7 @@ public class AfishaManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
-    
+
     @Test
     public void managerShouldRemoveAll() {
         FilmItem[]  films = {};
