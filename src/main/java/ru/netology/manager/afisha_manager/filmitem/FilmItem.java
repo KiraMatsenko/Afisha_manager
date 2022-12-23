@@ -2,24 +2,27 @@ package ru.netology.manager.afisha_manager.filmitem;
 
 public class FilmItem {
     private String filmName;
-    private String[] films = new String[0];
+    private int filmId;
 
-
-    public FilmItem() {
-    }
-
-    public FilmItem(String filmName) {
+    public FilmItem(String filmName, int filmId) { //allArgs конструктор чтобы задавать параметры
         this.filmName = filmName;
+        this.filmId = filmId;
     }
 
-    public String[] getFilms() {
-        return films;
-    }
+    public String getFilmName() { //геттер на поле
 
-    public String getFilmName() {
         return filmName;
     }
-    public void setFilmName(String filmName) {
+
+    public void setFilmName(String filmName) { //сеттер на поле
         this.filmName = filmName;
+    }
+
+    public int getFilmId() { //геттер на поле
+        return filmId;
+    }
+
+    public void setFilmId(int filmId) { //сеттер на поле
+        this.filmId = filmId;
     }
 }
