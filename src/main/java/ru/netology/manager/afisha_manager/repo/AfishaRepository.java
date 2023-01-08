@@ -16,13 +16,12 @@ public class AfishaRepository {
 
     public FilmItem[] findById(int filmId) {  //Id приходит параметром
         FilmItem[] tmp = new FilmItem[1];    //временный массив для искомого элемента
-        for (int i = 0; i < films.length;) {
+        for (int i = 0; i < films.length; ) {
             if (films[i].equals(filmId)) {  //если содержимое ячейки == filmID копирует содержимое
                 tmp[i] = films[i];
                 this.films = tmp;
                 return films;
-            }
-            else {
+            } else {
                 i++;
                 if (i == films.length + 1) {  //когда прошли по всему массиву
                     tmp[i] = null;            //в ячейку запишется null
@@ -37,7 +36,7 @@ public class AfishaRepository {
         FilmItem[] tmp = new FilmItem[films.length - 1];
         int copyToIndex = 0;
         for (FilmItem film : films) {
-            if(!film.equals(filmId)) {
+            if (!film.equals(filmId)) {
                 tmp[copyToIndex] = film;
                 copyToIndex++;
             }
@@ -51,7 +50,7 @@ public class AfishaRepository {
         return films;
     }
 
-    public  FilmItem[] getFilms() {
+    public FilmItem[] getFilms() {
         return films;
     }
 }

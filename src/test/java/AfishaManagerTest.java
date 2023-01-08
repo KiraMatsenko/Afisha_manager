@@ -4,6 +4,7 @@ import org.mockito.Mockito;
 import ru.netology.manager.afisha_manager.filmitem.FilmItem;
 import ru.netology.manager.afisha_manager.repo.AfishaRepository;
 import ru.netology.manager.afisha_manager.service.AfishaManager;
+
 import static org.mockito.Mockito.*;
 
 public class AfishaManagerTest {
@@ -13,11 +14,11 @@ public class AfishaManagerTest {
 
     FilmItem film1 = new FilmItem("Бладшот", 0);
     FilmItem film2 = new FilmItem("Вперёд", 1);
-    FilmItem film3 = new FilmItem("Отель Белград",2);
+    FilmItem film3 = new FilmItem("Отель Белград", 2);
 
     @Test
     public void shouldSaveNewFilm() {
-        FilmItem[] films= {film1, film2, film3};
+        FilmItem[] films = {film1, film2, film3};
         doReturn(films).when(repo).getFilms();
 
         FilmItem[] expected = {film1, film2, film3};
@@ -28,7 +29,7 @@ public class AfishaManagerTest {
 
     @Test
     public void managerShouldRemoveAll() {
-        FilmItem[]  films = {};
+        FilmItem[] films = {};
         doReturn(films).when(repo).removeAll();
 
         FilmItem[] expected = {};

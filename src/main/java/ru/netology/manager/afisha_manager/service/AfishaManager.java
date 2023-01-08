@@ -21,8 +21,8 @@ public class AfishaManager {
     }
 
     public FilmItem[] findById(int filmId) { //отдаём в параметр filmID
-       this.films = repo.getFilms();         //получаем существующий массив из репо
-       FilmItem[] tmp = new FilmItem[1];     //создаём массив на искомый элемент
+        this.films = repo.getFilms();         //получаем существующий массив из репо
+        FilmItem[] tmp = new FilmItem[1];     //создаём массив на искомый элемент
         for (int i = 0; i < films.length; i++) {
             if (i == filmId) {               // id=Index, когда находим нужный, то
                 tmp[i] = films[i];           //копируем содержимое
@@ -37,7 +37,7 @@ public class AfishaManager {
         FilmItem[] tmp = new FilmItem[films.length - 1];
         int copyToIndex = 0;
         for (FilmItem film : films) {
-            if(!film.equals(filmId)) {
+            if (!film.equals(filmId)) {
                 tmp[copyToIndex] = film;
                 copyToIndex++;
             }
