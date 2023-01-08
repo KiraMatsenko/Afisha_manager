@@ -25,12 +25,12 @@ public class AfishaManagerTest {
         service.addFilm(filmname7);
 
         String[] expected = {"Бладшот",
-        "Вперёд",
-        "Отель Белград",
-        "Джентльмены",
-        "Человек-невидимка",
-        "Тролли. Мировой тур",
-        "Номер один"};
+                "Вперёд",
+                "Отель Белград",
+                "Джентльмены",
+                "Человек-невидимка",
+                "Тролли. Мировой тур",
+                "Номер один"};
         String[] actual = service.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
@@ -105,7 +105,7 @@ public class AfishaManagerTest {
                 "Отель Белград",
                 "Вперёд",
                 "Бладшот"
-                };
+        };
         String[] actual = service.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
