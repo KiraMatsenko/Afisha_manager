@@ -28,10 +28,11 @@ public class AfishaManager {
     }
 
     public String[] findLast() {
+        int arrayMassive = limit;
         if (limit > films.length) {
-            limit = films.length;
+            arrayMassive = films.length;
         }
-        String[] reversed = new String[limit];
+        String[] reversed = new String[arrayMassive];
         for (int i = 0; i < reversed.length; i++) {
             reversed[i] = films[films.length - 1 - i];
         }
